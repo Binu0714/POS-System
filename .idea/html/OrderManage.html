@@ -21,6 +21,40 @@
             text-align: center;
         }
 
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            color: #ccc;
+            text-decoration: none;
+            padding: 10px;
+            width: 100%;
+            border-bottom: 1px solid #2a2a2a;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: #1f2223;
+            color: #fff;
+        }
+
+        .sidebar-nav .icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-nav .text {
+            font-size: 1rem;
+        }
+
         #main {
             width: 100%;
         }
@@ -201,7 +235,25 @@
 <body>
 
 <section id="Navbar">
-    <h2>POS System</h2>
+    <h2>🧾 POS SYSTEM</h2>
+    <nav class="sidebar-nav">
+        <a href="#dashboard">
+            <span class="icon">🔲</span>
+            <span class="text">Dashboard</span>
+        </a>
+        <a href="CustomerManage.html">
+            <span class="icon">📊</span>
+            <span class="text">Manage Customer</span>
+        </a>
+        <a href="ItemManage.html">
+            <span class="icon">💳</span>
+            <span class="text">Manage Items</span>
+        </a>
+        <a href="#orders">
+            <span class="icon">💯</span>
+            <span class="text">Manage Orders</span>
+        </a>
+    </nav>
 </section>
 
 <section id="main">
