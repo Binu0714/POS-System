@@ -44,11 +44,36 @@ $('#c_save').on('click',function (){
     var nic = $('#nic').val();
     var phone = $('#phone').val();
 
+    const namePattern = /^[A-Za-z\s]+$/;
+    const addressPattern = /^[A-Za-z0-9\s,.'-]{3,}$/;
+    const nicPattern = /^(\d{9}[Vv]|\d{12})$/;
+    const phonePattern = /^0\d{9}$/;
+
     if (name=='' || address=='' || nic=='' || phone==''){
         alert('All fields are required');
         return;
+    }
 
-    }else {
+    if (!namePattern.test(name)) {
+        alert('Invalid name. Only letters and spaces allowed.');
+        return;
+    }
+
+    if (!addressPattern.test(address)) {
+        alert('Invalid address format.');
+        return;
+    }
+
+    if (!nicPattern.test(nic)) {
+        alert('Invalid NIC. Use 123456789V or 200012345678 format.');
+        return;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Invalid phone number. Use 10 digits starting with 0.');
+        return;
+    }
+
         let customer_data = new CustomerModel(id,name,address,nic,phone);
         customer_db.push(customer_data);
 
@@ -58,9 +83,8 @@ $('#c_save').on('click',function (){
         console.log(customer_db);
 
         alert('Customer Added Successfully');
-
         clearFeilds();
-    }
+
 });
 
 $('#c_reset').on('click',function () {
@@ -88,6 +112,11 @@ $('#customer-tbody').on('click','tr',function () {
 });
 
 $('#c_delete').on('click',function () {
+    let name = $('#name').val();
+    let address = $('#address').val();
+    let nic = $('#nic').val();
+    let phone = $('#phone').val();
+
     if (id=='' || name=='' || address=='' || nic=='' || phone==''){
         alert('Please select a customer to delete');
         return;
