@@ -101,3 +101,21 @@ $('#item-tbody').on('click','tr',function () {
     $('#i_qty').val(qty);
     $('#i_price').val(price);
 });
+
+$('#item-update').on('click',function () {
+    let name = $('#i_name').val();
+    let qty = $('#i_qty').val();
+    let price = $('#i_price').val();
+
+    if (name=='' || qty=='' || price==''){
+        $('#item-update').prop().disabled = true;
+    }else {
+        let item_data = new ItemModel(id, name, qty, price);
+        item_db.splice(item_db.findIndex(item => item.id == id), 1, item_data);
+
+        alert('Item Updated Successfully');
+
+        loadItems();
+        clearFeilds();
+    }
+});
