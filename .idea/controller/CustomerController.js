@@ -1,6 +1,9 @@
 import {customer_db} from "../db/db.js";
 import CustomerModel from "../model/CustomerModel.js";
 
+let id;
+let rowIndex;
+
 function loadCustomers() {
     $('#customer-tbody').empty();
     customer_db.map((item,index)=>{
@@ -56,20 +59,12 @@ $('#c_save').on('click',function (){
 
         alert('Customer Added Successfully');
 
-        $('#id').val(nextId());
-        $('#name').val('');
-        $('#address').val('');
-        $('#nic').val('');
-        $('#phone').val('');
+        clearFeilds();
     }
 });
 
 $('#c_reset').on('click',function () {
-    $('#id').val(nextId());
-    $('#name').val('');
-    $('#address').val('');
-    $('#nic').val('');
-    $('#phone').val('');
+    clearFeilds();
 });
 
 $('#customer-tbody').on('click','tr',function () {
@@ -77,7 +72,7 @@ $('#customer-tbody').on('click','tr',function () {
     let obj = customer_db[idx];
     console.log(obj);
 
-    let id = obj.id;
+    id = obj.id;
     let name = obj.name;
     let address = obj.address;
     let nic = obj.nic;
@@ -91,3 +86,21 @@ $('#customer-tbody').on('click','tr',function () {
     $('#nic').val(nic);
     $('#phone').val(phone);
 });
+
+$('#c_delete').on('click',function () {
+    customer_db.splice(rowIndex,1);
+
+    alert('Customer Deleted Successfully');
+
+    loadCustomers();
+    nextId();
+    clearFeilds();
+});
+
+function clearFeilds() {
+    $('#id').val(nextId());
+    $('#name').val('');
+    $('#address').val('');
+    $('#nic').val('');
+    $('#phone').val('');
+}
