@@ -833,27 +833,27 @@
     <form class="row p-3 m-0 ">
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable ">Customer ID : </label>
-            <input type="name" class="form-control form-Field" id="inputFname">
+            <input type="name" class="form-control form-Field" id="id">
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable">Name : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <input type="name" class="form-control form-Field" id="name">
         </div>
 
         <div class="col-12 form-Field-div">
             <label for="inputAddress" class="form-label field-lable">Address : </label>
-            <input type="text" class="form-control form-Field" id="inputAddress" >
+            <input type="text" class="form-control form-Field" id="address" >
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label  class="form-label field-lable">NIC Number : </label>
-            <input type="number" class="form-control form-Field" id="inputPhone">
+            <input type="number" class="form-control form-Field" id="nic">
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable">Phone Number : </label>
-            <input type="text" class="form-control form-Field" id="inputEmail">
+            <input type="text" class="form-control form-Field" id="phone">
         </div>
 
         <div class="btn-container col-12">
@@ -868,7 +868,7 @@
     <div class="customer-table">
         <table class="table table-hover my-table">
             <thead>
-            <tr class="table-active">
+            <tr class="table-row">
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
@@ -876,49 +876,7 @@
                 <th scope="col">Phone</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Colombo</td>
-                <td>991234567V</td>
-                <td>0711234567</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Kandy</td>
-                <td>982345678V</td>
-                <td>0772345678</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Kamal</td>
-                <td>Galle</td>
-                <td>973456789V</td>
-                <td>0753456789</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>John</td>
-                <td>Matara</td>
-                <td>964567890V</td>
-                <td>0764567890</td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Arun</td>
-                <td>Jaffna</td>
-                <td>955678901V</td>
-                <td>0785678901</td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>Lisa</td>
-                <td>Negombo</td>
-                <td>946789012V</td>
-                <td>0706789012</td>
-            </tr>
+            <tbody id="customer-tbody">
             </tbody>
         </table>
     </div>
