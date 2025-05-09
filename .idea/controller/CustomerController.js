@@ -88,13 +88,18 @@ $('#customer-tbody').on('click','tr',function () {
 });
 
 $('#c_delete').on('click',function () {
-    customer_db.splice(rowIndex,1);
+    if (id=='' || name=='' || address=='' || nic=='' || phone==''){
+        alert('Please select a customer to delete');
+        return;
+    }else {
+        customer_db.splice(rowIndex,1);
 
-    alert('Customer Deleted Successfully');
+        alert('Customer Deleted Successfully');
 
-    loadCustomers();
-    nextId();
-    clearFeilds();
+        loadCustomers();
+        nextId();
+        clearFeilds();
+    }
 });
 
 function clearFeilds() {
@@ -104,3 +109,23 @@ function clearFeilds() {
     $('#nic').val('');
     $('#phone').val('');
 }
+
+$('#c_update').on('click',function () {
+    let name = $('#name').val();
+    let address = $('#address').val();
+    let nic = $('#nic').val();
+    let phone = $('#phone').val();
+
+    if (name=='' || address=='' || nic=='' || phone==''){
+        $('#c_update').prop().disabled = true;
+    }else{
+        let customer_data = new CustomerModel(id,name,address,nic,phone);
+        customer_db.splice(customer_db.findIndex(item => item.id==id),1,customer_data);
+
+        alert('Customer Updated Successfully');
+
+        loadCustomers();
+        nextId();
+        clearFeilds();
+    }
+});
