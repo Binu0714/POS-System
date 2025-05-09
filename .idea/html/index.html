@@ -910,30 +910,30 @@
     <form class="row p-3 m-0 ">
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable ">Item ID : </label>
-            <input type="name" class="form-control form-Field" id="inputFname">
+            <input type="name" class="form-control form-Field" id="id">
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable">Name : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <input type="name" class="form-control form-Field" id="name">
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable">Quantity : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <input type="name" class="form-control form-Field" id="qty">
         </div>
 
         <div class="col-md-6 form-Field-div">
             <label class="form-label field-lable">Price : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <input type="name" class="form-control form-Field" id="price">
         </div>
 
 
         <div class="btn-container col-12">
-            <button type="button" class="btn btn-warning">Save</button>
-            <button type="button" class="btn btn-info">Update</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-primary">Reset</button>
+            <button type="button" class="btn btn-warning" id="item-save">Save</button>
+            <button type="button" class="btn btn-info" id="item-update">Update</button>
+            <button type="button" class="btn btn-danger" id="item-delete">Delete</button>
+            <button type="button" class="btn btn-primary" id="item-reset">Reset</button>
 
         </div>
     </form>
@@ -950,31 +950,7 @@
                 <th scope="col">Price Per Unit</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Apple</td>
-                <td>50</td>
-                <td>Rs. 30.00</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Banana</td>
-                <td>100</td>
-                <td>Rs. 15.00</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Orange</td>
-                <td>70</td>
-                <td>Rs. 25.00</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Mango</td>
-                <td>30</td>
-                <td>Rs. 50.00</td>
-            </tr>
+            <tbody id="item-tbody">
             </tbody>
         </table>
     </div>
