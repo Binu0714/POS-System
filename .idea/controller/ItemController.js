@@ -2,6 +2,7 @@ import {customer_db, item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
 
 let id;
+let rowIndex;
 
 function nextId() {
     let id;
@@ -115,6 +116,22 @@ $('#item-update').on('click',function () {
 
         alert('Item Updated Successfully');
 
+        loadItems();
+        clearFeilds();
+    }
+});
+
+$('#item-delete').on('click',function () {
+    let name = $('#i_name').val();
+    let qty = $('#i_qty').val();
+    let price = $('#i_price').val();
+
+    if (id=='' || name=='' || qty=='' || price==''){
+        alert('Please select a item to delete');
+        return;
+    }else {
+        item_db.splice(rowIndex, 1);
+        alert('Item Deleted Successfully');
         loadItems();
         clearFeilds();
     }
