@@ -67,7 +67,27 @@ $('#c_save').on('click',function (){
 $('#c_reset').on('click',function () {
     $('#id').val(nextId());
     $('#name').val('');
-    $('#adress').val('');
+    $('#address').val('');
     $('#nic').val('');
     $('#phone').val('');
+});
+
+$('#customer-tbody').on('click','tr',function () {
+    let idx = $(this).index();
+    let obj = customer_db[idx];
+    console.log(obj);
+
+    let id = obj.id;
+    let name = obj.name;
+    let address = obj.address;
+    let nic = obj.nic;
+    let phone = obj.phone;
+
+    console.log(id,name,address,nic,phone);
+
+    $('#id').val(id);
+    $('#name').val(name);
+    $('#address').val(address);
+    $('#nic').val(nic);
+    $('#phone').val(phone);
 });

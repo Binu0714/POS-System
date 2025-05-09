@@ -1173,12 +1173,6 @@
         }
     });
 
-    $("#Dashboard").on("click",function () {
-        $("#dashboard-page").css("display","block");
-        $("#item-page,#customer-page,#order-page").css("display","none");
-        setLastPage('dashboard-page');
-    });
-
     $("#customer-load").on("click",function () {
         $("#customer-page").css("display","block");
         $("#dashboard-page,#item-page,#order-page").css("display","none");
@@ -1195,6 +1189,12 @@
         $("#order-page").css("display","block");
         $("#dashboard-page,#customer-page,#item-page").css("display","none");
         setLastPage('order-page');
+    });
+
+    $("#Dashboard").on("click",function () {
+        $("#dashboard-page").css("display","block");
+        $("#item-page,#customer-page,#order-page").css("display","none");
+        setLastPage('dashboard-page');
     });
 
 </script>
