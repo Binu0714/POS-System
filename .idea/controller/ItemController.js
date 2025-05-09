@@ -1,6 +1,8 @@
 import {customer_db, item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
 
+let id;
+
 function nextId() {
     let id;
 
@@ -44,6 +46,34 @@ $('#item-save').on('click',function () {
     alert('Item Saved Successfully');
 
     loadItems();
-    nextId();
+    clearFeilds();
+});
 
+function clearFeilds() {
+    $('#i_id').val(nextId());
+    $('#i_name').val('');
+    $('#i_qty').val('');
+    $('#i_price').val('');
+}
+
+$('#item-reset').on('click',function () {
+    clearFeilds();
+});
+
+$('#item-tbody').on('click','tr',function () {
+    let idx = $(this).index();
+    let obj = item_db[idx];
+    console.log(obj);
+
+    id = obj.id;
+    let name = obj.name;
+    let qty = obj.qty;
+    let price = obj.price;
+
+    console.log(id,name,qty,price);
+
+    $('#i_id').val(id);
+    $('#i_name').val(name);
+    $('#i_qty').val(qty);
+    $('#i_price').val(price);
 });

@@ -77,12 +77,11 @@ $('#c_save').on('click',function (){
         let customer_data = new CustomerModel(id,name,address,nic,phone);
         customer_db.push(customer_data);
 
-        loadCustomers();
-
         console.log(customer_data);
         console.log(customer_db);
 
         alert('Customer Added Successfully');
+        loadCustomers();
         clearFeilds();
 
 });
