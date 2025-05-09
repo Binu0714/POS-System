@@ -199,8 +199,8 @@
             color: #e74c3c;
         }
 
-
-        #main {
+        /*customer*/
+        #customer-page {
             width: 100%;
         }
 
@@ -330,7 +330,7 @@
 
         /*item style*/
 
-        #main {
+        #item-page {
             width: 100%;
         }
 
@@ -458,7 +458,7 @@
             background-color: #f1f1f1;
         }
 
-        #main {
+        #order-page {
             width: 100%;
         }
 
@@ -650,19 +650,19 @@
 <section id="Navbar">
     <h2 id="pos-title">🧾 POS SYSTEM</h2>
     <nav class="sidebar-nav">
-        <a href="#Dashboard">
+        <a href="#Dashboard" id="Dashboard">
             <span class="icon">✔</span>
             <span class="text">Dashboard</span>
         </a>
-        <a href="#customer-load">
+        <a href="#customer-load" id="customer-load">
             <span class="icon">✔</span>
             <span class="text">Manage Customer</span>
         </a>
-        <a href="#item-load">
+        <a href="#item-load" id="item-load">
             <span class="icon">✔</span>
             <span class="text">Manage Items</span>
         </a>
-        <a href="#order-load">
+        <a href="#order-load" id="order-load">
             <span class="icon">✔</span>
             <span class="text">Manage Orders</span>
         </a>
@@ -670,7 +670,7 @@
 
 <div class="main-div">
     <!--dashboard-->
-    <section class="header">
+    <section class="header" id="dashboard-page">
         <section id="Dashboard" class="Dashboard-Section header">
             <div class="container-fluid">
                 <div class="row mb-4">
@@ -807,7 +807,7 @@
     </section>
 
     <!--customer-->
-    <section id="main">
+    <section id="customer-page">
     <nav class="navbar custom-navbar" id="customer-load">
         <div class="container-fluid text-center justify-content-center d-flex">
             <span class="navbar-brand mb-0 h1">Customer Management</span>
@@ -884,7 +884,7 @@
 </section>
 
     <!--item-->
-    <section id="main">
+    <section id="item-page">
     <nav class="navbar custom-navbar" id="item-load">
         <div class="container-fluid text-center justify-content-center d-flex">
             <span class="navbar-brand mb-0 h1">Item Management</span>
@@ -981,7 +981,7 @@
 </section>
 
     <!--order-->
-    <section id="main">
+    <section id="order-page">
     <nav class="navbar custom-navbar" id="order-load">
         <div class="container-fluid text-center justify-content-center d-flex">
             <span class="navbar-brand mb-0 h1">Customer Order Management</span>
@@ -1152,7 +1152,52 @@
 <script type="module" src="../controller/ItemController.js"></script>
 <script type="module" src="../controller/OrderController.js"></script>
 
+<script>
 
+    function setLastPage(page) {
+        localStorage.setItem('lastPage', page);
+    }
+
+    function getLastPage() {
+        return localStorage.getItem('lastPage');
+    }
+
+    $(document).ready(function () {
+        $("#dashboard-page,#item-page,#customer-page,#order-page").css("display","none");
+
+        var lastPage = getLastPage();
+        if (lastPage){
+            $("#"+lastPage).css("display","block");
+        }else {
+            $("#dashboard-page").css("display","block");
+        }
+    });
+
+    $("#Dashboard").on("click",function () {
+        $("#dashboard-page").css("display","block");
+        $("#item-page,#customer-page,#order-page").css("display","none");
+        setLastPage('dashboard-page');
+    });
+
+    $("#customer-load").on("click",function () {
+        $("#customer-page").css("display","block");
+        $("#dashboard-page,#item-page,#order-page").css("display","none");
+        setLastPage('customer-page');
+    });
+
+    $("#item-load").on("click",function () {
+        $("#item-page").css("display","block");
+        $("#dashboard-page,#customer-page,#order-page").css("display","none");
+        setLastPage('item-page');
+    });
+
+    $("#order-load").on("click",function () {
+        $("#order-page").css("display","block");
+        $("#dashboard-page,#customer-page,#item-page").css("display","none");
+        setLastPage('order-page');
+    });
+
+</script>
 
 </body>
 </html>
