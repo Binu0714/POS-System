@@ -40,6 +40,30 @@ $('#item-save').on('click',function () {
     let qty = $('#i_qty').val();
     let price = $('#i_price').val();
 
+    const namePattern = /^[A-Za-z0-9 ]{2,50}$/;
+    const qtyPattern = /^[1-9][0-9]*$/;
+    const pricePattern = /^\d+(\.\d{1,2})?$/;
+
+    if (name=='' || qty=='' || price==''){
+        alert('All fields are required');
+        return;
+    }
+
+    if (!namePattern.test(name)) {
+        alert('Invalid name format.');
+        return;
+    }
+
+    if (!qtyPattern.test(qty)) {
+        alert('Invalid quantity format.');
+        return;
+    }
+
+    if (!pricePattern.test(price)) {
+        alert('Invalid price format.Must be a number with up to 2 decimal places');
+        return;
+    }
+
     let item_data = new ItemModel(id,name,qty,price);
     item_db.push(item_data);
 
