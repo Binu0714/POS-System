@@ -55,5 +55,19 @@ $('#c_save').on('click',function (){
         console.log(customer_db);
 
         alert('Customer Added Successfully');
+
+        $('#id').val(nextId());
+        $('#name').val('');
+        $('#address').val('');
+        $('#nic').val('');
+        $('#phone').val('');
     }
+});
+
+$('#c_reset').on('click',function () {
+    $('#id').val(nextId());
+    $('#name').val('');
+    $('#adress').val('');
+    $('#nic').val('');
+    $('#phone').val('');
 });
