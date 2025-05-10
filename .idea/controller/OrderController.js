@@ -1,4 +1,4 @@
-import {order_db} from '../db/db.js';
+import {order_db, customer_db, item_db} from '../db/db.js';
 import OrderModel from '../model/OrderModel.js';
 
 $(document).ready(function (){
@@ -16,10 +16,10 @@ function nextId() {
         id = 'O001';
     }
     return id;
-    console.log(id);
 }
 
 function clearFeilds() {
     $('#order_id').val(nextId());
-    $('#cus_id').val('');
+   //complete karanna ona
 }
+
