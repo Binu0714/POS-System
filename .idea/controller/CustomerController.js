@@ -4,6 +4,10 @@ import CustomerModel from "../model/CustomerModel.js";
 let id;
 let rowIndex;
 
+$(document).ready(function (){
+    clearFeilds();
+});
+
 function loadCustomers() {
     $('#customer-tbody').empty();
     customer_db.map((item,index)=>{

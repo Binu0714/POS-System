@@ -4,6 +4,10 @@ import ItemModel from "../model/ItemModel.js";
 let id;
 let rowIndex;
 
+$(document).ready(function (){
+    clearFeilds();
+});
+
 function nextId() {
     let id;
 
