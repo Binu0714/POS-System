@@ -1,11 +1,13 @@
 import {customer_db} from "../db/db.js";
 import CustomerModel from "../model/CustomerModel.js";
+import {setCustomerIds} from "../controller/OrderController.js";
 
 let id;
 let rowIndex;
 
 $(document).ready(function (){
     clearFeilds();
+    setCustomerIds();
 });
 
 function loadCustomers() {
@@ -87,6 +89,7 @@ $('#c_save').on('click',function (){
         alert('Customer Added Successfully');
         loadCustomers();
         clearFeilds();
+        setCustomerIds();
 
 });
 
@@ -131,6 +134,7 @@ $('#c_delete').on('click',function () {
         loadCustomers();
         nextId();
         clearFeilds();
+        setCustomerIds();
     }
 });
 
@@ -159,5 +163,6 @@ $('#c_update').on('click',function () {
         loadCustomers();
         nextId();
         clearFeilds();
+        setCustomerIds();
     }
 });
