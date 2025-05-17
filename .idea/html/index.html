@@ -484,55 +484,20 @@
             width: 100%;
         }
 
-        /* Order Page Specific Styling */
-        .totals-section {
-            margin: 20px 15px;
-            background-color: var(--mid-color);
-            padding: 20px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding: 10px 0;
-            font-size: 1.1rem;
-            font-weight: 500;
-            align-items: center;
-        }
-
-        .total-row label {
-            flex: 1;
-            text-align: right;
-            padding-right: 20px;
-            color: var(--text-primary);
-        }
-
-        .total-value {
-            flex: 1;
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .discount-select {
-            width: 100px;
-            padding: 8px;
-            border-radius: var(--radius-sm);
-            border: 1px solid #ddd;
-            outline: none;
-            text-align: center;
-        }
-
-        .discount-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
-        }
-
         .full-width-button {
+            display: block;
+            width: calc(100% - 30px);
+            margin: 25px 15px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .full-width-button2 {
             display: block;
             width: calc(100% - 30px);
             margin: 25px 15px;
@@ -546,18 +511,199 @@
         }
 
         .full-width-button:hover {
+            background-color: mediumblue;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .full-width-button2:hover {
             background-color: #218c53;
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
-        /* Consistent UI elements across all pages */
         #customer-page, #item-page, #order-page, #dashboard-page {
             width: 100%;
             padding-bottom: 30px;
         }
 
-        /* Media queries for mobile responsiveness */
+        /*payment summary*/
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background: forestgreen;
+            padding: 1.2rem;
+            border-bottom: none;
+        }
+
+        .card-header h5 {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.8rem;
+            background-color: #ffffff;
+        }
+
+        .total-section {
+            font-size: 1.1rem;
+        }
+
+        .total-row {
+            padding: 0.5rem 0;
+            transition: background-color 0.2s ease;
+        }
+
+        .total-row:hover {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .label {
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .value {
+            font-weight: 600;
+        }
+
+        .total-value {
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            background-color: #F3F4F6;
+        }
+
+        .grand-total-section {
+            margin-top: 1rem;
+            padding-top: 1.2rem;
+            border-top: 2px dashed #E5E7EB;
+        }
+
+        .grand-total {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #E5E7EB;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            border-color: #6366F1;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #4B5563;
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group-text {
+            background-color: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            color: #6B7280;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .form-floating > .form-control:focus ~ label {
+            color: #4F46E5;
+        }
+
+        .discount-value {
+            color: #EF4444;
+            background-color: #FEF2F2;
+        }
+
+        .balance-value {
+            color: #10B981;
+            background-color: #ECFDF5;
+        }
+
+        .cash-value {
+            color: #3B82F6;
+            background-color: #EFF6FF;
+        }
+
+        .total-card {
+            border-radius: 12px;
+            background-color: #F9FAFB;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .total-card-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .icon-circle.subtotal {
+            background-color: #E5E7EB;
+            color: #4B5563;
+        }
+
+        .icon-circle.discount {
+            background-color: #FECACA;
+            color: #DC2626;
+        }
+
+        .icon-circle.cash {
+            background-color: #BFDBFE;
+            color: #2563EB;
+        }
+
+        .icon-circle.balance {
+            background-color: #A7F3D0;
+            color: #059669;
+        }
+
+        .icon-circle.total {
+            background-color: #818CF8;
+            color: #ffffff;
+        }
+
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -921,7 +1067,7 @@
         </div>
 
         <div class="col-md-6 form-Field-div">
-            <label class="form-label field-lable">Price : </label>
+            <label class="form-label field-lable">Unit Price : </label>
             <input type="name" class="form-control form-Field" id="i_price">
         </div>
 
@@ -997,7 +1143,7 @@
                 <input id="inputCustomerId" type="text" class="form-control" aria-label="Text input with dropdown button" readonly>
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
-                <ul id="dropdownList" class="dropdown-menu dropdown-menu-end">
+                <ul id="customerDropdownList" class="dropdown-menu dropdown-menu-end">
 
                 </ul>
             </div>
@@ -1010,12 +1156,12 @@
 
         <label>Order Item details</label>
         <div class="col-12 col-md-6 mb-3 form-Field-div">
-            <label class="form-label ">Item ID</label>
+            <label class="form-label ">Item ID : </label>
             <div class="input-group">
-                <input id="inputCustomerId" type="text" class="form-control" aria-label="Text input with dropdown button">
+                <input id="inputItemId" type="text" class="form-control" aria-label="Text input with dropdown button">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
-                <ul id="dropdownList" class="dropdown-menu dropdown-menu-end">
+                <ul id="itemDropdownList" class="dropdown-menu dropdown-menu-end">
 
                 </ul>
             </div>
@@ -1027,41 +1173,19 @@
         </div>
 
         <div class="col-md-6 form-Field-div">
-            <label class="form-label field-lable">Item Qty : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <label class="form-label field-lable">Quantity On Hand : </label>
+            <input type="name" class="form-control form-Field" id="itemQty">
         </div>
 
         <div class="col-md-6 form-Field-div">
-            <label class="form-label field-lable">Price : </label>
-            <input type="name" class="form-control form-Field" id="inputLname">
+            <label class="form-label field-lable">Unit Price : </label>
+            <input type="name" class="form-control form-Field" id="itemPrice">
         </div>
 
         <button type="button" class="btn btn-danger w-100">Add To Cart</button>
     </form>
 
-    <div class="totals-section">
-        <div class="total-row">
-            <label>Order Total</label>
-            <div class="total-value">Rs. 14,410</div>
-        </div>
-        <div class="total-row">
-            <label>Discount</label>
-            <div class="total-value">
-                <select class="form-control form-Field discount-select">
-                    <option value="0">None</option>
-                    <option value="500">5%</option>
-                    <option value="1000">10%</option>
-                    <option value="1500">15%</option>
-                </select>
-            </div>
-        </div>
-        <div class="total-row">
-            <label>Sub Total</label>
-            <div class="total-value">Rs. 13,410</div>
-        </div>
-    </div>
-
-    <br>
+        <br>
 
     <div class="customer-table">
         <table class="table table-hover my-table">
@@ -1117,6 +1241,78 @@
     <button type="button" class="btn btn-success full-width-button">
         Place Customer Order
     </button>
+
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="card">
+                        <div class="card-header text-white text-center">
+                            <h5 class="mb-0"><i class="fas fa-receipt me-2"></i>Payment Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row total-section">
+                                <!-- Left side: Subtotal and Total with Labels -->
+                                <div class="col-6">
+                                    <div class="total-card">
+                                        <div class="total-card-title">
+                                            <span class="icon-circle subtotal"><i class="fas fa-tag"></i></span>
+                                            Subtotal
+                                        </div>
+                                        <div class="total-card-value">$245.00</div>
+                                    </div>
+
+                                    <div class="total-card">
+                                        <div class="total-card-title">
+                                            <span class="icon-circle total"><i class="fas fa-check-circle"></i></span>
+                                            Total
+                                        </div>
+                                        <div class="total-card-value">$225.00</div>
+                                    </div>
+                                </div>
+
+                                <!-- Right side: Discount, Cash, Balance as Input Fields -->
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            <span class="icon-circle discount"><i class="fas fa-percent"></i></span>
+                                            Discount
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" value="20.00">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            <span class="icon-circle cash"><i class="fas fa-wallet"></i></span>
+                                            Cash
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" value="250.00">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            <span class="icon-circle balance"><i class="fas fa-exchange-alt"></i></span>
+                                            Balance
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" value="25.00" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary full-width-button2">Complete Payment</button>
 
 </section>
 

@@ -1,11 +1,13 @@
 import {customer_db, item_db} from "../db/db.js";
 import ItemModel from "../model/ItemModel.js";
+import {setItemIds} from "../controller/OrderController.js";
 
 let id;
 let rowIndex;
 
 $(document).ready(function (){
     clearFeilds();
+    setItemIds();
 });
 
 function nextId() {
@@ -76,6 +78,7 @@ $('#item-save').on('click',function () {
 
     loadItems();
     clearFeilds();
+    setItemIds();
 });
 
 function clearFeilds() {
@@ -122,6 +125,7 @@ $('#item-update').on('click',function () {
 
         loadItems();
         clearFeilds();
+        setItemIds();
     }
 });
 
@@ -138,5 +142,6 @@ $('#item-delete').on('click',function () {
         alert('Item Deleted Successfully');
         loadItems();
         clearFeilds();
+        setItemIds();
     }
 });
