@@ -5,6 +5,9 @@ import OrderDetailsModel from '../model/OrderDetailsModel.js';
 $(document).ready(function (){
     clearFeilds();
     setItemIds();
+
+    const today = new Date().toISOString().split('T')[0];
+    $('#date').val(today);
 });
 
 function nextId() {
@@ -130,22 +133,36 @@ function loadOrders() {
 $('#add_to_cart').on('click',function () {
     let itemId = $('#inputItemId').val();
     let itemName = $('#itemName').val();
-    let itemQty = $('#itemQty').val();
+    let itemQty = parseInt($('#itemQty').val());
     let itemPrice = $('#itemPrice').val();
-    let buyingQty = $('#buyingQty').val();
+    let buyingQty = parseInt($('#buyingQty').val());
 
     let order_data = new OrderModel(itemId,itemName,itemQty,itemPrice,buyingQty);
     order_db.push(order_data);
 
-    if (itemQty >= buyingQty){
-        reduceQty();
-        loadOrders();
-    }else{
+    console.log("itemqty"+itemQty);
+    console.log("buyingqty"+buyingQty);
+
+    if( $('#date').val() === '' || $('#inputCustomerId').val() === '' || $('#inputCustomerName').val() === '' || $('#inputItemId').val() === '' ||
+        $('#itemName').val() === '' || $('#itemQty').val() === '' || $('#itemPrice').val() === '' || $('#buyingQty').val() === '')
+    {
         Swal.fire({
             icon: 'error',
-            title: 'Insufficient Quantity',
-            text: 'Insufficient item quantity.Please check the availabale quantity.',
+            title: 'Complete All Feilds',
+            text: 'You must complete all the feild before adding to cart.',
         });
+    }else {
+        if (itemQty >= buyingQty && buyingQty > 0){
+            // reduceQty();
+            loadOrders();
+            clearFeilds();
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Insufficient Quantity',
+                text: 'Insufficient item quantity.Please check the availabale quantity.',
+            });
+        }
     }
 
 });
@@ -216,7 +233,7 @@ $('#cash-input').on('keydown', function (e) {
 
 function reduceQty() {
     order_db.forEach(order => {
-        const matching = item_db.find(dbItem.id === order.id);
+        const matching = item_db.find(dbItem => dbItem.id === order.id);
         if (matching){
             matching.qty -= parseInt(order.qty);
         }
@@ -276,6 +293,7 @@ $('#complete').on('click', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             clearFeilds();
+            reduceQty();
         }
     });
 
