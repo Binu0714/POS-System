@@ -30,8 +30,6 @@ function clearFeilds() {
     $('#itemPrice').val('');
     $('#buyingQty').val('');
 
-    $('#cart-tbody').empty();
-
     $('#total-price').text('');
     $('subtotal').text('');
     $('#discount-input').val('');
@@ -207,6 +205,8 @@ $('#cash-input').on('keydown', function (e) {
 });
 
 $('#complete').on('click', function () {
+    clearFeilds();
+
     let summary = '';
     let total = 0;
 
@@ -245,7 +245,6 @@ $('#complete').on('click', function () {
         width: 600
     });
 
-    clearFeilds();
 });
 
 
