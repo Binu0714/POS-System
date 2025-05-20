@@ -1,5 +1,6 @@
-import {order_db, customer_db, item_db} from '../db/db.js';
+import {order_db, customer_db, item_db, order_detail_db} from '../db/db.js';
 import OrderModel from '../model/OrderModel.js';
+import OrderDetailsModel from '../model/OrderDetailsModel.js';
 
 $(document).ready(function (){
     clearFeilds();
@@ -31,7 +32,7 @@ function clearFeilds() {
     $('#buyingQty').val('');
 
     $('#total-price').text('');
-    $('subtotal').text('');
+    $('#subtotal').text('');
     $('#discount-input').val('');
     $('#balance').val('');
     $('#cash-input').val('');
@@ -137,7 +138,6 @@ $('#add_to_cart').on('click',function () {
     order_db.push(order_data);
 
     loadOrders();
-    clearFeilds();
 });
 
 $(document).on('click', '.table-remove-btn', function () {
@@ -205,7 +205,18 @@ $('#cash-input').on('keydown', function (e) {
 });
 
 $('#complete').on('click', function () {
-    clearFeilds();
+    let o_id = $('#order_id').val();
+    let cus_id = $('#inputCustomerId').val();
+    let i_id = $('#inputItemId').val();
+    let qty = $('#itemQty').val();
+    let price = $('#itemPrice').val();
+    let date = $('#date').val();
+
+    let orderDetailData = new OrderDetailsModel(o_id, cus_id, i_id, qty, price, date);
+    order_detail_db.push(orderDetailData);
+
+    console.log(orderDetailData);
+    console.log(order_detail_db);
 
     let summary = '';
     let total = 0;
@@ -243,6 +254,10 @@ $('#complete').on('click', function () {
         icon: 'success',
         confirmButtonText: 'OK',
         width: 600
+    }).then((result) => {
+        if (result.isConfirmed) {
+            clearFeilds();
+        }
     });
 
 });
