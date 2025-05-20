@@ -86,6 +86,7 @@ function clearFeilds() {
     $('#i_name').val('');
     $('#i_qty').val('');
     $('#i_price').val('');
+    $('#item-SearchBar').val('');
 }
 
 $('#item-reset').on('click',function () {
@@ -143,5 +144,36 @@ $('#item-delete').on('click',function () {
         loadItems();
         clearFeilds();
         setItemIds();
+    }
+});
+
+$('#item-search').on('click',function () {
+    let serachItem = $('#item-SearchBar').val().trim();
+
+    console.log(item_db)
+
+    if (serachItem) {
+        let found = false;
+
+        item_db.forEach(item => {
+            if (item.name == serachItem) {
+                $('#i_id').val(item.id);
+                $('#i_name').val(item.name);
+                $('#i_qty').val(item.qty);
+                $('#i_price').val(item.price);
+
+                found = true;
+                return;
+            }
+        });
+
+        if (!found) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Not Found',
+                text: 'Item not found.Try search Item Name'
+            });
+        }
+
     }
 });

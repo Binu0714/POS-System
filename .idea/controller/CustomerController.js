@@ -175,7 +175,7 @@ $('#customer-search').on('click',function () {
         let found = false;
 
         customer_db.forEach(customer => {
-            if (customer.id==searchCustomer || customer.name==searchCustomer || customer.address==searchCustomer || customer.nic==searchCustomer || customer.phone==searchCustomer){
+            if (customer.name==searchCustomer ||customer.nic==searchCustomer || customer.phone==searchCustomer){
                 $('#id').val(customer.id);
                 $('#name').val(customer.name);
                 $('#address').val(customer.address);
@@ -191,7 +191,7 @@ $('#customer-search').on('click',function () {
             Swal.fire({
                 icon: 'error',
                 title: 'Not Found',
-                text: 'Customer not found.'
+                text: 'Customer not found.Try search with Customer Name , NIC or Phone Number.'
             });
         }
     }
