@@ -29,6 +29,14 @@ function clearFeilds() {
     $('#itemQty').val('');
     $('#itemPrice').val('');
     $('#buyingQty').val('');
+
+    $('#cart-tbody').empty();
+
+    $('#total-price').text('');
+    $('subtotal').text('');
+    $('#discount-input').val('');
+    $('#balance').val('');
+    $('#cash-input').val('');
 }
 
 export function setCustomerIds(){
@@ -198,6 +206,47 @@ $('#cash-input').on('keydown', function (e) {
     }
 });
 
+$('#complete').on('click', function () {
+    let summary = '';
+    let total = 0;
+
+    order_db.forEach((order, index) => {
+        const itemTotal = parseFloat(order.qty) * parseInt(order.buyingQty);
+        total += itemTotal;
+        summary += `${index + 1}. ${order.name} - ${order.buyingQty} x Rs.${order.qty} = Rs.${itemTotal.toFixed(2)}<br>`;
+    });
+
+    const discount = parseFloat($('#discount-input').val()) || 0;
+    const discountAmount = (total * discount) / 100;
+    const subtotal = total - discountAmount;
+    const cash = parseFloat($('#cash-input').val()) || 0;
+    const balance = cash - subtotal;
+
+    summary += `<hr><b>Total:</b> Rs.${total.toFixed(2)}<br>`;
+    summary += `<b>Discount:</b> ${discount}% (Rs.${discountAmount.toFixed(2)})<br>`;
+    summary += `<b>Subtotal:</b> Rs.${subtotal.toFixed(2)}<br>`;
+    summary += `<b>Cash:</b> Rs.${cash.toFixed(2)}<br>`;
+    summary += `<b>Balance:</b> Rs.${balance.toFixed(2)}`;
+
+    if (order_db.length === 0 || !discount || !cash) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please fill in all fields and add at least one item to the order.',
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: '🧾 Order Summary',
+        html: summary,
+        icon: 'success',
+        confirmButtonText: 'OK',
+        width: 600
+    });
+
+    clearFeilds();
+});
 
 
 
