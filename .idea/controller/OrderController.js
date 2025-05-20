@@ -134,5 +134,16 @@ $('#add_to_cart').on('click',function () {
     clearFeilds();
 });
 
+$(document).on('click', '.table-remove-btn', function () {
+    const itemId = $(this).closest('tr').find('td:first').text().trim();
+    const index = order_db.findIndex(item => item.id === itemId);
+
+    if (index !== -1) {
+        order_db.splice(index, 1);
+        loadOrders();
+        setTotal();
+    }
+});
+
 
 
