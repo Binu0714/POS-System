@@ -4,14 +4,6 @@ import OrderModel from '../model/OrderModel.js';
 $(document).ready(function (){
     clearFeilds();
     setItemIds();
-
-    $('#discount-input').on('keydown', function (e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            setSubTotal();
-        }
-    });
-
 });
 
 function nextId() {
@@ -167,23 +159,48 @@ function setSubTotal() {
     order_db.forEach(order => {
         total += parseFloat(order.qty) * parseInt(order.buyingQty);
     });
-
     console.log("total ====== " + total);
 
     let discount = parseFloat($('#discount-input').val()) || 0;
-
     console.log("discount ====== " + discount);
 
     let subTotal = total - (discount / 100 * total);
-
     $('#subtotal').text('Rs/= ' + subTotal.toFixed(2));
-
     console.log("subTotal ====== " + subTotal);
 }
+
+$('#discount-input').on('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        setSubTotal();
+    }
+});
 
 $('#place-order').on('click',function () {
     setTotal();
 });
+
+$('#cash-input').on('keydown', function (e) {
+    if (e.key === 'Enter') {
+        const cash = parseFloat($(this).val()) || 0;
+
+        const totalText = $('#subtotal').text();
+        console.log(totalText);
+        const total = parseFloat(totalText.replace(/[^\d.]/g, '')) || 0;
+
+        if (cash < total) {
+            alert('Insufficient cash! It must be equal to or greater than the total.');
+            $('#balance').val('0.00');
+        } else {
+            const balance = cash - total;
+            $('#balance').val(balance.toFixed(2));
+        }
+    }
+});
+
+
+
+
 
 
 
