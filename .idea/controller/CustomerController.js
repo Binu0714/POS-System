@@ -56,27 +56,47 @@ $('#c_save').on('click',function (){
     const phonePattern = /^0\d{9}$/;
 
     if (name=='' || address=='' || nic=='' || phone==''){
-        alert('All fields are required');
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please complete all required fields before proceeding.',
+        });
         return;
     }
 
     if (!namePattern.test(name)) {
-        alert('Invalid name. Only letters and spaces allowed.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.',
+        });
         return;
     }
 
     if (!addressPattern.test(address)) {
-        alert('Invalid address format.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.',
+        });
         return;
     }
 
     if (!nicPattern.test(nic)) {
-        alert('Invalid NIC. Use 123456789V or 200012345678 format.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.Use 123456789V or 200012345678 format.',
+        });
         return;
     }
 
     if (!phonePattern.test(phone)) {
-        alert('Invalid phone number. Use 10 digits starting with 0.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.Use 10 digits starting with 0.',
+        });
         return;
     }
 
@@ -86,7 +106,13 @@ $('#c_save').on('click',function (){
         console.log(customer_data);
         console.log(customer_db);
 
-        alert('Customer Added Successfully');
+    Swal.fire({
+        icon: 'success',
+        title: 'Customer Added',
+        text: 'Customer added successfully!',
+        confirmButtonText: 'OK'
+    });
+
         loadCustomers();
         clearFeilds();
         setCustomerIds();
@@ -124,12 +150,22 @@ $('#c_delete').on('click',function () {
     let phone = $('#phone').val();
 
     if (id=='' || name=='' || address=='' || nic=='' || phone==''){
-        alert('Please select a customer to delete');
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please select a customer to delete',
+        });
         return;
     }else {
         customer_db.splice(rowIndex,1);
 
-        alert('Customer Deleted Successfully');
+        Swal.fire({
+            icon: 'success',
+            title: 'Customer Deleted',
+            text: 'Customerdeleted successfully!',
+            confirmButtonText: 'OK'
+        });
+
 
         loadCustomers();
         nextId();
@@ -159,7 +195,12 @@ $('#c_update').on('click',function () {
         let customer_data = new CustomerModel(id,name,address,nic,phone);
         customer_db.splice(customer_db.findIndex(item => item.id==id),1,customer_data);
 
-        alert('Customer Updated Successfully');
+        Swal.fire({
+            icon: 'success',
+            title: 'Customer Updated',
+            text: 'Customer updated successfully!',
+            confirmButtonText: 'OK'
+        });
 
         loadCustomers();
         nextId();
