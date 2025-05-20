@@ -144,6 +144,7 @@ function clearFeilds() {
     $('#address').val('');
     $('#nic').val('');
     $('#phone').val('');
+    $('#SearchBar').val('');
 }
 
 $('#c_update').on('click',function () {
@@ -164,5 +165,34 @@ $('#c_update').on('click',function () {
         nextId();
         clearFeilds();
         setCustomerIds();
+    }
+});
+
+$('#customer-search').on('click',function () {
+    let searchCustomer = $('#SearchBar').val().trim();
+
+    if (searchCustomer){
+        let found = false;
+
+        customer_db.forEach(customer => {
+            if (customer.id==searchCustomer || customer.name==searchCustomer || customer.address==searchCustomer || customer.nic==searchCustomer || customer.phone==searchCustomer){
+                $('#id').val(customer.id);
+                $('#name').val(customer.name);
+                $('#address').val(customer.address);
+                $('#nic').val(customer.nic);
+                $('#phone').val(customer.phone);
+
+                found = true;
+                return;
+            }
+        });
+
+        if (!found) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Not Found',
+                text: 'Customer not found.'
+            });
+        }
     }
 });
