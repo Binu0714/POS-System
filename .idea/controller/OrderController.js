@@ -4,6 +4,14 @@ import OrderModel from '../model/OrderModel.js';
 $(document).ready(function (){
     clearFeilds();
     setItemIds();
+
+    $('#discount-input').on('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            setSubTotal();
+        }
+    });
+
 });
 
 function nextId() {
@@ -143,6 +151,38 @@ $(document).on('click', '.table-remove-btn', function () {
         loadOrders();
         setTotal();
     }
+});
+
+function setTotal() {
+    let total = 0;
+    order_db.forEach(order => {
+        total += parseFloat(order.qty) * parseInt(order.buyingQty);
+    });
+    $('#total-price').text('Rs/= '+ total.toFixed(2));
+}
+
+function setSubTotal() {
+    let total = 0;
+
+    order_db.forEach(order => {
+        total += parseFloat(order.qty) * parseInt(order.buyingQty);
+    });
+
+    console.log("total ====== " + total);
+
+    let discount = parseFloat($('#discount-input').val()) || 0;
+
+    console.log("discount ====== " + discount);
+
+    let subTotal = total - (discount / 100 * total);
+
+    $('#subtotal').text('Rs/= ' + subTotal.toFixed(2));
+
+    console.log("subTotal ====== " + subTotal);
+}
+
+$('#place-order').on('click',function () {
+    setTotal();
 });
 
 

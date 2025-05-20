@@ -1230,7 +1230,7 @@
         </table>
     </div>
 
-    <button type="button" class="btn btn-success full-width-button">
+    <button type="button" class="btn btn-success full-width-button" id="place-order">
         Place Customer Order
     </button>
 
@@ -1247,18 +1247,18 @@
                                 <div class="col-6">
                                     <div class="total-card">
                                         <div class="total-card-title">
-                                            <span class="icon-circle subtotal"><i class="fas fa-tag"></i></span>
-                                            Subtotal
+                                            <span class="icon-circle total"><i class="fas fa-check-circle"></i></span>
+                                            Total
                                         </div>
-                                        <div class="total-card-value" id="subtotal">$245.00</div>
+                                        <div class="total-card-value" id="total-price"></div>
                                     </div>
 
                                     <div class="total-card">
                                         <div class="total-card-title">
-                                            <span class="icon-circle total"><i class="fas fa-check-circle"></i></span>
-                                            Total
+                                            <span class="icon-circle subtotal"><i class="fas fa-tag"></i></span>
+                                            Subtotal
                                         </div>
-                                        <div class="total-card-value" id="total-price">$225.00</div>
+                                        <div class="total-card-value" id="subtotal"></div>
                                     </div>
                                 </div>
 
@@ -1269,8 +1269,8 @@
                                             Discount
                                         </label>
                                         <div class="input-group">
-                                            <span class="input-group-text">Rs.</span>
-                                            <input type="number" class="form-control" value="20.00">
+                                            <span class="input-group-text">%</span>
+                                            <input type="text" class="form-control" id="discount-input" >
                                         </div>
                                     </div>
 
@@ -1281,7 +1281,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rs.</span>
-                                            <input type="number" class="form-control" value="250.00">
+                                            <input type="number" class="form-control" id="cash-input">
                                         </div>
                                     </div>
 
@@ -1292,7 +1292,7 @@
                                         </label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rs.</span>
-                                            <input type="number" class="form-control" value="25.00" readonly>
+                                            <input type="number" class="form-control" id="balance" readonly>
                                         </div>
                                     </div>
                                 </div>
