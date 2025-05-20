@@ -85,4 +85,46 @@ function getCustomerByUd(id) {
     return customer_db.find(item => item.id === id);
 }
 
+function loadOrders() {
+    $('#cart-tbody').empty();
+
+    order_db.map((item,index) =>{
+        let id = item.id;
+        let name = item.name;
+        let qty = item.price;
+        let price = item.qty;
+        let buyingQty = item.buyingQty;
+        let total = buyingQty*price;
+
+        let data = `<tr class="table-row">
+                <td>${id}</td>
+                <td>${name}</td>
+                <td>${qty}</td>
+                <td>${price}</td>
+                <td>${total}</td>
+                <td> 
+                    <button class="table-remove-btn">
+                          <i class=" bi bi-trash"></i>
+                    </button>
+                </td>
+        </tr>`
+        $('#cart-tbody').append(data);
+        console.log(order_db);
+    })
+}
+
+$('#add_to_cart').on('click',function () {
+    let itemId = $('#inputItemId').val();
+    let itemName = $('#itemName').val();
+    let itemQty = $('#itemQty').val();
+    let itemPrice = $('#itemPrice').val();
+    let buyingQty = $('#buyingQty').val();
+
+    let order_data = new OrderModel(itemId,itemName,itemQty,itemPrice,buyingQty);
+    order_db.push(order_data);
+
+    loadOrders();
+});
+
+
 

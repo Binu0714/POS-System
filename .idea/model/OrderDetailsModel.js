@@ -5,5 +5,6 @@ export default class OrderDetailsModel{
         this.item_id = item_id;
         this.qty = qty;
         this.price = price;
+        this.date = date;
     }
 }
