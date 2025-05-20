@@ -52,29 +52,50 @@ $('#item-save').on('click',function () {
     const pricePattern = /^\d+(\.\d{1,2})?$/;
 
     if (name=='' || qty=='' || price==''){
-        alert('All fields are required');
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please complete all required fields before proceeding.',
+        });
         return;
     }
 
     if (!namePattern.test(name)) {
-        alert('Invalid name format.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.',
+        });
         return;
     }
 
     if (!qtyPattern.test(qty)) {
-        alert('Invalid quantity format.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.',
+        });
         return;
     }
 
     if (!pricePattern.test(price)) {
-        alert('Invalid price format.Must be a number with up to 2 decimal places');
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Input',
+            text: 'Please check your input values and try again.Must be a number with up to 2 decimal places',
+        });
         return;
     }
 
     let item_data = new ItemModel(id,name,qty,price);
     item_db.push(item_data);
 
-    alert('Item Saved Successfully');
+    Swal.fire({
+        icon: 'success',
+        title: 'Item Added',
+        text: 'Item added successfully!',
+        confirmButtonText: 'OK'
+    });
 
     loadItems();
     clearFeilds();
@@ -122,7 +143,12 @@ $('#item-update').on('click',function () {
         let item_data = new ItemModel(id, name, qty, price);
         item_db.splice(item_db.findIndex(item => item.id == id), 1, item_data);
 
-        alert('Item Updated Successfully');
+        Swal.fire({
+            icon: 'success',
+            title: 'Item Updated',
+            text: 'Item updated successfully!',
+            confirmButtonText: 'OK'
+        });
 
         loadItems();
         clearFeilds();
@@ -136,11 +162,24 @@ $('#item-delete').on('click',function () {
     let price = $('#i_price').val();
 
     if (id=='' || name=='' || qty=='' || price==''){
-        alert('Please select a item to delete');
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Missing Information',
+            text: 'Please select a item to delete',
+        });
+
         return;
     }else {
         item_db.splice(rowIndex, 1);
-        alert('Item Deleted Successfully');
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Item Deleted',
+            text: 'Item deleted successfully!',
+            confirmButtonText: 'OK'
+        });
+
         loadItems();
         clearFeilds();
         setItemIds();

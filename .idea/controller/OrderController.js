@@ -153,9 +153,13 @@ $('#add_to_cart').on('click',function () {
         });
     }else {
         if (itemQty >= buyingQty && buyingQty > 0){
-            // reduceQty();
             loadOrders();
-            clearFeilds();
+
+            $('#inputItemId').val('');
+            $('#itemName').val('');
+            $('#itemQty').val('');
+            $('#itemPrice').val('');
+            $('#buyingQty').val('');
         }else{
             Swal.fire({
                 icon: 'error',
