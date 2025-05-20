@@ -21,7 +21,14 @@ function nextId() {
 
 function clearFeilds() {
     $('#order_id').val(nextId());
-   //complete karanna ona
+    $('#date').val('');
+    $('#inputCustomerId').val('');
+    $('#inputCustomerName').val('');
+    $('#inputItemId').val('');
+    $('#itemName').val('');
+    $('#itemQty').val('');
+    $('#itemPrice').val('');
+    $('#buyingQty').val('');
 }
 
 export function setCustomerIds(){
@@ -124,6 +131,7 @@ $('#add_to_cart').on('click',function () {
     order_db.push(order_data);
 
     loadOrders();
+    clearFeilds();
 });
 
 
