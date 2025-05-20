@@ -137,7 +137,17 @@ $('#add_to_cart').on('click',function () {
     let order_data = new OrderModel(itemId,itemName,itemQty,itemPrice,buyingQty);
     order_db.push(order_data);
 
-    loadOrders();
+    if (itemQty >= buyingQty){
+        reduceQty();
+        loadOrders();
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Quantity',
+            text: 'Insufficient item quantity.Please check the availabale quantity.',
+        });
+    }
+
 });
 
 $(document).on('click', '.table-remove-btn', function () {
@@ -203,6 +213,15 @@ $('#cash-input').on('keydown', function (e) {
         }
     }
 });
+
+function reduceQty() {
+    order_db.forEach(order => {
+        const matching = item_db.find(dbItem.id === order.id);
+        if (matching){
+            matching.qty -= parseInt(order.qty);
+        }
+    })
+}
 
 $('#complete').on('click', function () {
     let o_id = $('#order_id').val();
