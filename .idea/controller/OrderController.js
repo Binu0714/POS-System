@@ -5,10 +5,13 @@ import OrderDetailsModel from '../model/OrderDetailsModel.js';
 $(document).ready(function (){
     clearFeilds();
     setItemIds();
+    setTotal();
+});
 
+function setDate() {
     const today = new Date().toISOString().split('T')[0];
     $('#date').val(today);
-});
+}
 
 function nextId() {
     let id;
@@ -24,8 +27,8 @@ function nextId() {
 }
 
 function clearFeilds() {
+    setDate();
     $('#order_id').val(nextId());
-    $('#date').val('');
     $('#inputCustomerId').val('');
     $('#inputCustomerName').val('');
     $('#inputItemId').val('');
@@ -129,47 +132,44 @@ function loadOrders() {
         console.log(order_db);
     })
 }
-
-$('#add_to_cart').on('click',function () {
+$('#add_to_cart').on('click', function () {
     let itemId = $('#inputItemId').val();
     let itemName = $('#itemName').val();
     let itemQty = parseInt($('#itemQty').val());
-    let itemPrice = $('#itemPrice').val();
+    let itemPrice = parseFloat($('#itemPrice').val());
     let buyingQty = parseInt($('#buyingQty').val());
 
-    let order_data = new OrderModel(itemId,itemName,itemQty,itemPrice,buyingQty);
-    order_db.push(order_data);
-
-    console.log("itemqty"+itemQty);
-    console.log("buyingqty"+buyingQty);
-
-    if( $('#date').val() === '' || $('#inputCustomerId').val() === '' || $('#inputCustomerName').val() === '' || $('#inputItemId').val() === '' ||
-        $('#itemName').val() === '' || $('#itemQty').val() === '' || $('#itemPrice').val() === '' || $('#buyingQty').val() === '')
-    {
+    if ($('#date').val() === '' || $('#inputCustomerId').val() === '' || $('#inputCustomerName').val() === '' ||
+        itemId === '' || itemName === '' || isNaN(itemQty) || isNaN(itemPrice) || isNaN(buyingQty)) {
         Swal.fire({
             icon: 'error',
-            title: 'Complete All Feilds',
-            text: 'You must complete all the feild before adding to cart.',
+            title: 'Complete All Fields',
+            text: 'You must complete all the fields before adding to cart.',
         });
-    }else {
-        if (itemQty >= buyingQty && buyingQty > 0){
-            loadOrders();
-
-            $('#inputItemId').val('');
-            $('#itemName').val('');
-            $('#itemQty').val('');
-            $('#itemPrice').val('');
-            $('#buyingQty').val('');
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Insufficient Quantity',
-                text: 'Insufficient item quantity.Please check the availabale quantity.',
-            });
-        }
+        return;
     }
 
+    if (itemQty < buyingQty || buyingQty <= 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Insufficient Quantity',
+            text: 'Insufficient item quantity. Please check the available quantity.',
+        });
+        return;
+    }
+
+    let existingItem = order_db.find(item => item.id === itemId);
+    if (existingItem) {
+        existingItem.buyingQty += buyingQty;
+    } else {
+        let order_data = new OrderModel(itemId, itemName, itemQty, itemPrice, buyingQty);
+        order_db.push(order_data);
+    }
+
+    loadOrders();
+    setTotal();
 });
+
 
 $(document).on('click', '.table-remove-btn', function () {
     const itemId = $(this).closest('tr').find('td:first').text().trim();
@@ -239,16 +239,16 @@ function reduceQty() {
     order_db.forEach(order => {
         const matching = item_db.find(dbItem => dbItem.id === order.id);
         if (matching){
-            matching.qty -= parseInt(order.qty);
+            matching.qty -= parseInt(order.buyingQty);
         }
-    })
+    });
 }
 
 $('#complete').on('click', function () {
     let o_id = $('#order_id').val();
     let cus_id = $('#inputCustomerId').val();
     let i_id = $('#inputItemId').val();
-    let qty = $('#itemQty').val();
+    let qty = $('#buyingQty').val();
     let price = $('#itemPrice').val();
     let date = $('#date').val();
 
@@ -298,6 +298,7 @@ $('#complete').on('click', function () {
         if (result.isConfirmed) {
             clearFeilds();
             reduceQty();
+            $('#cart-tbody').empty();
         }
     });
 

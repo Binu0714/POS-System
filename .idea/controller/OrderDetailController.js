@@ -1,9 +1,5 @@
 import {order_db, customer_db, item_db, order_detail_db} from '../db/db.js';
-import OrderDetailModel from '../model/OrderDetailModel.js';
-
-$(document).ready(function (){
-
-});
+import OrderDetailModel from '../model/OrderDetailsModel.js';
 
 $('#order-search').on('click', function () {
     console.log("wada..")
@@ -21,11 +17,10 @@ $('#order-search').on('click', function () {
             let row = `
                 <tr>
                     <td>${order.order_id}</td> 
-                    <td>${order.cus_id}</td>
-                    <td>${order.item_name}</td>
-                    <td>${order.qty}</td>
-                    <td>${order.price}</td>
                     <td>${order.date}</td>
+                    <td>${order.cus_id}</td>
+                    <td>${order.qty}</td>
+                    <td>${order.price*order.qty}</td>
                 </tr>
             `;
             tableBody.append(row);
